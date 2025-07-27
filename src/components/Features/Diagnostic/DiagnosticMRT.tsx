@@ -132,7 +132,6 @@ export const DiagnosticMRT = ({
       enableGlobalFilter={false}
       enableTopToolbar={false}
       enablePagination={false}
-
     />
   );
 };
