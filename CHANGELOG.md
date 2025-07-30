@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ***
 
+## [0.3.1] - 2025-07-30
+
+### 🧹 Maintenance
+
+- Minor code cleanup across components to improve readability and maintainability.
+- Updated Mantine React Table configuration to use layoutMode: 'grid' for improved column alignment and layout
+  flexibility.
+
 ## [0.3.0] - 2025-06-11
 
 ### ✨ Added
