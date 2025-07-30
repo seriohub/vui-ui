@@ -1,4 +1,3 @@
-import { useAgentStatus } from '@/contexts/AgentContext';
 import { useAppStatus } from '@/contexts/AppContext';
 
 // Interface
@@ -16,20 +15,18 @@ interface BooleanState {
 
 // Class
 export class AgentStateManager {
-  private appValues = useAppStatus();
-  private agentValues = useAgentStatus();
-
   public uiURL: string;
+  // private agentValues = useAgentStatus();
   public apiURL: string;
   public k8sHealth: any;
   public apiOrigins: Record<string, any>;
   public arch: string;
   public watchdog: string;
-  // public compatibility: string;
-
-  private booleanState: BooleanState;
   public allTrue: boolean;
+  // public compatibility: string;
   public hasWarnings: boolean;
+  private appValues = useAppStatus();
+  private booleanState: BooleanState;
 
   constructor() {
     this.uiURL = '';
@@ -60,31 +57,8 @@ export class AgentStateManager {
     this.updateGlobalStates();
   }
 
-  private updateGlobalStates(): void {
-    this.allTrue = Object.values(this.booleanState).every((v) => v === true);
-  }
-
   public getVariable(varName: keyof BooleanState): boolean {
     return this.booleanState[varName];
-  }
-
-  private maskDomain(url: string): string {
-    // use regex to identify domain in URL
-    const urlPattern = /^(https?:\/\/)([^\/]+)(.*)$/;
-    const maskedDomain = '###.###.###';
-
-    // regex apply
-    const result = url.match(urlPattern);
-
-    if (result) {
-      const protocol = result[1];
-      // const domain = result[2];
-      const path = result[3];
-
-      // replace domain with mask
-      return `${protocol}${maskedDomain}${path}`;
-    }
-    return url;
   }
 
   public generateMarkdownReport(): string {
@@ -122,5 +96,28 @@ export class AgentStateManager {
     }
 
     return markdown;
+  }
+
+  private updateGlobalStates(): void {
+    this.allTrue = Object.values(this.booleanState).every((v) => v === true);
+  }
+
+  private maskDomain(url: string): string {
+    // use regex to identify domain in URL
+    const urlPattern = /^(https?:\/\/)([^\/]+)(.*)$/;
+    const maskedDomain = '###.###.###';
+
+    // regex apply
+    const result = url.match(urlPattern);
+
+    if (result) {
+      const protocol = result[1];
+      // const domain = result[2];
+      const path = result[3];
+
+      // replace domain with mask
+      return `${protocol}${maskedDomain}${path}`;
+    }
+    return url;
   }
 }

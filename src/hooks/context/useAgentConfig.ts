@@ -8,7 +8,7 @@ import { useAgentStatus } from '@/contexts/AgentContext';
 import { useSocketStatus } from '@/contexts/SocketContext';
 import { useAgentConfiguration } from '@/api/Agent/useAgentConfiguration';
 import { useAppInfoOrigins } from "@/api/Agent/useAppInfoOrigins";
-import { useAgentGHealthWatchdog } from "@/api/Agent/useAgentInfoWatchdog";
+import { useAgentHealthWatchdog } from "@/api/Agent/useAgentInfoWatchdog";
 import { useAppInfoArch } from "@/api/Agent/useAppInfoArch";
 import { useCoreAgents } from "@/api/Core/useCoreAgents";
 import { useClusterHealth } from "@/api/Agent/useClusterHealth";
@@ -52,7 +52,7 @@ export const useAgentConfig = () => {
 
   const {
     getAgentHealthWatchdog
-  } = useAgentGHealthWatchdog();
+  } = useAgentHealthWatchdog();
 
   // setCurrentAgent
   useEffect(() => {
@@ -86,7 +86,9 @@ export const useAgentConfig = () => {
       getAgentConfiguration().then(response => {
         agentValues.setAgentConfig(response);
       })
-      getAppVersion().then(response => {agentValues.setVeleroInstalledVersion(response)})
+      getAppVersion().then(response => {
+        agentValues.setVeleroInstalledVersion(response)
+      })
     }
     if (agentValues.isAgentAvailable && agentValues.currentAgent && (serverValues.isCurrentServerControlPlane == false || (serverValues.isCurrentServerControlPlane == true && appValues.isAuthenticated))) {
       getClusterHealth().then(response => {

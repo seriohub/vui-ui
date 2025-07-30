@@ -3,7 +3,7 @@
 import * as dotenv from 'dotenv';
 import { env } from 'next-runtime-env';
 
-// load enviroments variables from file .env
+// load environments variables from file .env
 dotenv.config();
 
 interface APIManagerConfigInterface {

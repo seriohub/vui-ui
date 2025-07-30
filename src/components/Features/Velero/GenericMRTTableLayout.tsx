@@ -78,7 +78,7 @@ export function GenericMRTTableLayout({
   const table = useMantineReactTable({
     columns,
     data: items,
-    // layoutMode: 'grid',
+    layoutMode: 'grid',
 
     enableSorting: true,
     enableColumnOrdering: true,

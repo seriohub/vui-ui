@@ -1,6 +1,6 @@
 import { useApiGet } from '@/hooks/utils/useApiGet';
 
-export const useAgentGHealthWatchdog = () => {
+export const useAgentHealthWatchdog = () => {
   const {
     data,
     getData,
